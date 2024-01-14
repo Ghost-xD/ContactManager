@@ -12,7 +12,6 @@ A simple ASP.NET Core Web API for managing contacts.
   - [Update Contact](#update-contact)
   - [Create Contact](#create-contact)
 - [Dependencies](#dependencies)
-- [License](#license)
 
 ## Introduction
 
@@ -73,8 +72,14 @@ Update an existing contact.
 
 
 **Request Body:**
-- JSON object representing the contact with updated information.
-
+```json
+{
+  id: number,
+  firstName: string,
+  lastName: string,
+  email: string
+}
+```
 ### Create Contact
 
 Create a new contact.
@@ -83,8 +88,13 @@ Create a new contact.
 
 
 **Request Body:**
-- JSON object representing the new contact.
-
+```json
+{
+  firstName: string,
+  lastName: string,
+  email: string
+}
+```
 ## Dependencies
 
 - Microsoft.AspNetCore.Mvc
@@ -92,4 +102,19 @@ Create a new contact.
 - Microsoft.Extensions.Caching.Memory
 - Microsoft.Extensions.Logging
 
+## How to Run
 
+- Use the http port - 5020 and press F5 in Visual Studio.
+
+## Application Structure
+
+- This is a controller based Asp .Net Web Api with CRUD functionality.
+- It uses MemoryCache for caching.
+- It uses one Custom Middleware for handling global exceptions.
+- For validations in the Model class, DataAnnotations are used.
+
+## Scalability Options
+
+- Replacing JSON (mock db) with some relational Database.
+- There is a UtilityClass in place which can handle any type of database without modifying the controller class logic.
+- Since there is code written for server side pagination, we can handle as much data as we want (when using RDBMS). We can take advantage of EFCORE to prepare a query to provide exact number of records from the db using Skip and Take functions.
